@@ -7,7 +7,7 @@ public class Loan {
     int time;
 
     // constructor
-    public Loan(int housePrice, int downPayment, float interest, int time) {
+    public Loan(int housePrice, int downPayment, double interest, int time) {
         this.loanAmount = housePrice - downPayment;
         this.interest = interest;
         this.time = time;
@@ -21,7 +21,7 @@ public class Loan {
         double monthlyInterestRate = interestInDecimals / 12;
 
         //total number of monthly payments
-        int numOfPayments = time * 12;
+        int numOfPayments = this.time * 12;
 
         /* calculates the monthly payment for a loan and stores it in variable result
          * includes principal and interest only
@@ -30,20 +30,23 @@ public class Loan {
          */
         double result = this.loanAmount *(( (monthlyInterestRate) * Math.pow((1 + monthlyInterestRate), numOfPayments)) / ((Math.pow((1 + monthlyInterestRate), numOfPayments)) - 1));
         // rounds results to the nearest two decimal places.
-        return Math.round(result * 100.0) / 100.0;
+        //return Math.round(result * 100.0) / 100.0;
+        return result;
     }
 
     public double calculateMonthlyInterestPayments() {
-        double interestInDecimals = interest / 100;
+        double interestInDecimals = this.interest / 100;
         double monthlyInterestRate = interestInDecimals / 12;
         //Interest Payment = P * (r/n)
         double result = this.loanAmount * monthlyInterestRate;
-        return Math.round(result * 100.0) / 100.0;
+//        return Math.round(result * 100.0) / 100.0;
+        return result;
     }
 
     public double calculateMonthlyPrincipalPayments() {
         double result = calculateMonthlyPayments() - calculateMonthlyInterestPayments();
-        return Math.round(result * 100.0) / 100.0;
+//        return Math.round(result * 100.0) / 100.0;
+        return result;
     }
 
     public double calculateTotalLoanPayment() {
@@ -57,7 +60,8 @@ public class Loan {
 
     public double calculateTotalInterestPayment() {
         double result = this.calculateTotalLoanPayment() - this.loanAmount;
-        return Math.round(result * 100.0) / 100.0;
+//        return Math.round(result * 100.0) / 100.0;
+        return result;
     }
 
     // prints the amortized table for monthly payments

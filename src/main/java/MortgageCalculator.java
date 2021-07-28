@@ -3,32 +3,26 @@ import java.util.Scanner;
 class MortgageCalculator {
     
     public static void main(String[] args){
-        int housePrice;
-        int downPayment;
-        float interest;
-        int time;
 
-
-        /*creates an object of Scanner class
-        * this object can be use to take input from user */
+        //gets input from user
         Scanner input = new Scanner(System.in);
 
         System.out.println("House price: ");
         //takes input from user & stores it in variable housePrice
-        housePrice = input.nextInt();
+        int housePrice = input.nextInt();
 
         System.out.println("Down payment: ");
 
         //takes input from user & stores it in variable down payment
-        downPayment = input.nextInt();
+        int downPayment = input.nextInt();
 
         System.out.println("Interest rate: ");
         //takes input from user & stores it in variable interest
-        interest = input.nextFloat();
+         double interest = input.nextFloat();
 
         System.out.println("Mortgage period (Years): ");
         //takes input from user & stores it in variable time
-        time = input.nextInt();
+        int time = input.nextInt();
 
         //close scanner
         input.close();
