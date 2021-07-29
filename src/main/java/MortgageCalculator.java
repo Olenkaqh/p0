@@ -4,7 +4,7 @@ class MortgageCalculator {
     
     public static void main(String[] args){
 
-        //gets input from user
+        //reads input from user
         Scanner input = new Scanner(System.in);
 
         System.out.println("House price: ");
