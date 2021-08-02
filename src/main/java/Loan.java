@@ -29,7 +29,7 @@ public class Loan {
          * formula found in https://www.bankrate.com/calculators/mortgages/amortization-calculator.aspx
          */
         double result = this.loanAmount *(( (monthlyInterestRate) * Math.pow((1 + monthlyInterestRate), numOfPayments)) / ((Math.pow((1 + monthlyInterestRate), numOfPayments)) - 1));
-        // rounds results to the nearest two decimal places.
+        // rounds result to the nearest two decimal places.
         //return Math.round(result * 100.0) / 100.0;
         return result;
     }
@@ -42,7 +42,6 @@ public class Loan {
 //        return Math.round(result * 100.0) / 100.0;
         return result;
     }
-
     public double calculateMonthlyPrincipalPayments() {
         double result = calculateMonthlyPayments() - calculateMonthlyInterestPayments();
 //        return Math.round(result * 100.0) / 100.0;
@@ -87,6 +86,18 @@ public class Loan {
             System.out.println('\n');
         }
 
+    }
+
+ // calculates number of payments on a loan
+    public double calculateNewNumberOfPayments( double extraPayment) {
+        //new monthly payment
+        double newPayment = calculateMonthlyPayments() + extraPayment;
+
+        //The loan payoff equation is  N = (-log(1- i * A / P)) / log (1 + i).
+        // p: monthly payments r: interest rate per period  n: number of periods a: loan amount
+        //found in https://brownmath.com/bsci/loan.htm
+        double result = -Math.log(1- (((interest/1200)*loanAmount)/newPayment))/Math.log(1+(interest/1200));
+       return result;
     }
 }
 
