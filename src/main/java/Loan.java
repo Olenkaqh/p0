@@ -2,12 +2,14 @@ import java.lang.Math;
 
 public class Loan {
     // data members
+    int housePrice;
     int loanAmount;
     double interest;
     int time;
 
     // constructor
     public Loan(int housePrice, int downPayment, double interest, int time) {
+        this.housePrice = housePrice;
         this.loanAmount = housePrice - downPayment;
         this.interest = interest;
         this.time = time;

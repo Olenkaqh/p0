@@ -1,13 +1,16 @@
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.SQLOutput;
+import com.google.gson.Gson;
 import java.util.Scanner;
 //import org.apache.log4j.*;
 
 class MortgageCalculator {
-    
+    private static FileWriter file;
+    private static Scanner input = new Scanner(System.in);
+
     public static void main(String[] args){
 //        final Logger logger = Logger.getLogger()
-        //reads input from user
-        Scanner input = new Scanner(System.in);
 
         System.out.println("House price: ");
         //takes input from user & stores it in variable housePrice
@@ -20,7 +23,7 @@ class MortgageCalculator {
 
         System.out.println("Interest rate: ");
         //takes input from user & stores it in variable interest
-         double interest = input.nextFloat();
+         double interest = input.nextDouble();
 
         System.out.println("Mortgage period (Years): ");
         //takes input from user & stores it in variable time
@@ -30,6 +33,29 @@ class MortgageCalculator {
 
         //creates a new loan object
         Loan newLoan = new Loan(housePrice, downPayment,interest, time);
+
+
+        Gson gson = new Gson();
+        //converts java objects to JSON strings
+        String json = gson.toJson(newLoan);
+        System.out.println("Json object: " + json);
+
+        try {
+            file = new FileWriter("/Users/olenka/Desktop/p0/Record.txt", true);
+            file.write('\n');
+            file.write(json); // writes json to file
+            System.out.println("JSON file has been successfully copied to file...");
+        } catch (IOException e){
+            e.printStackTrace();
+        } finally {
+            try {
+                file.flush();
+                file.close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
 
         //prints loan calculations
         System.out.println("Total monthly payment (includes principal & interest): $ " + newLoan.calculateMonthlyPayments());
