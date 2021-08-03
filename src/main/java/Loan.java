@@ -106,7 +106,7 @@ public class Loan {
             double annualBalance =this.loanAmount;
             int years  = this.time;
 
-            //prints the loan information for each month;
+            //prints the loan information for each year;
             for (int i = 1; i <= years; i++) {
                 for(int j = 1; j <= 12; j++){
                     monthlyInterest = totalBalance * (this.interest / 1200);
