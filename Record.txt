@@ -2,3 +2,5 @@
 {"housePrice":600000,"loanAmount":480000,"interest":4.2,"time":30}
 {"housePrice":120000,"loanAmount":116000,"interest":2.0,"time":15}
 {"housePrice":400000,"loanAmount":100000,"interest":5.0,"time":5}
+{"housePrice":350000,"loanAmount":345000,"interest":3.8,"time":30}
+{"housePrice":100000,"loanAmount":95500,"interest":8.0,"time":15}

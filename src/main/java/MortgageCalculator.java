@@ -1,17 +1,21 @@
 import java.io.FileWriter;
 import java.io.IOException;
-import java.sql.SQLOutput;
 import com.google.gson.Gson;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import java.util.Scanner;
-//import org.apache.log4j.*;
+
 
 class MortgageCalculator {
+
     private static FileWriter file;
     private static Scanner input = new Scanner(System.in);
-
+//    static Logger logger = Logger.getLogger(MortgageCalculator.class.getName());
     public static void main(String[] args){
-//        final Logger logger = Logger.getLogger()
+        Logger log = LoggerFactory.getLogger(MortgageCalculator.class);
+        log.info("Starting calculator...");
 
+//        logger.debug("Hello Log!");
         System.out.println("House price: ");
         //takes input from user & stores it in variable housePrice
         int housePrice = input.nextInt();
@@ -38,13 +42,12 @@ class MortgageCalculator {
         Gson gson = new Gson();
         //converts java objects to JSON strings
         String json = gson.toJson(newLoan);
-        System.out.println("Json object: " + json);
 
         try {
             file = new FileWriter("/Users/olenka/Desktop/p0/Record.txt", true);
             file.write('\n');
             file.write(json); // writes json to file
-            System.out.println("JSON file has been successfully copied to file...");
+            log.info("String has been successfully copied to file...");
         } catch (IOException e){
             e.printStackTrace();
         } finally {
@@ -66,16 +69,13 @@ class MortgageCalculator {
 
         System.out.println("Do you want to see the amortization table ? (Y/N) ");
         char status = input.next().charAt(0);
-        if(status == 'Y' ){
-
-                System.out.println("Do you want the monthly or annual table? (m :month or a: annual)");
-                char status1 = input.next().charAt(0);
-                    while(status1 != 'm' && status1 != 'a'){
-                        System.out.println("Please enter the right command.");
-                        status1 = input.next().charAt(0);
-                    }
-
-//                }
+        if(status == 'Y' ) {
+            System.out.println("Do you want the monthly or annual table? (m :month or a: annual)");
+            char status1 = input.next().charAt(0);
+            while(status1 != 'm' && status1 != 'a'){
+                System.out.println("Please enter the right command.");
+                status1 = input.next().charAt(0);
+            }
             //returns the amortized Schedule table for the respective period
             newLoan.generateAmortizedPaymentsTable(status1);
         }

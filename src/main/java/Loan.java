@@ -68,8 +68,6 @@ public class Loan {
     // prints the amortized table for monthly payments
     public void generateAmortizedPaymentsTable(char period) {
 
-
-
         if ( period =='m') {
             //prints the table header
             System.out.println("---------------------------------------------------------");
@@ -94,8 +92,7 @@ public class Loan {
         }
         else {
             double monthlyPayment = this.calculateMonthlyPayments();
-            double monthlyPrincipal = this.calculateMonthlyPrincipalPayments();
-//            double monthlyInterest = this.calculateMonthlyInterestPayments();
+            double monthlyPrincipal;
             double monthlyInterest;
             double totalBalance = this.loanAmount;
             //prints the table header
@@ -119,7 +116,7 @@ public class Loan {
                     annualBalance -= monthlyPrincipal;
                 }
 
-                System.out.format("%5s %10s %10s %10s %15s", i,Math.round(monthlyPayment*12* 100.0) /100.0, Math.round(annualPrincipal* 100.0) /100.0, Math.round(annualInterest* 100.0) /100.0, Math.round(annualBalance* 100.0) /100.0);
+                System.out.format("%5s %20s %20s %20s %20s", i,Math.round(monthlyPayment*12* 100.0) /100.0, Math.round(annualPrincipal* 100.0) /100.0, Math.round(annualInterest* 100.0) /100.0, Math.round(annualBalance* 100.0) /100.0);
 
                 //resets variables for each year
                     annualInterest = 0;
