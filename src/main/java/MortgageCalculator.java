@@ -1,29 +1,31 @@
-import java.io.FileWriter;
+
 import java.io.IOException;
 import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.text.NumberFormat;
+import java.util.Locale;
 import java.util.Scanner;
 
 
 class MortgageCalculator {
 
-    private static FileWriter file;
     private static Scanner input = new Scanner(System.in);
-//    static Logger logger = Logger.getLogger(MortgageCalculator.class.getName());
+
     public static void main(String[] args){
         Logger log = LoggerFactory.getLogger(MortgageCalculator.class);
+
         log.info("Starting calculator...");
 
-//        logger.debug("Hello Log!");
         System.out.println("House price: ");
         //takes input from user & stores it in variable housePrice
-        int housePrice = input.nextInt();
+        double housePrice = input.nextDouble();
 
         System.out.println("Down payment: ");
 
         //takes input from user & stores it in variable down payment
-        int downPayment = input.nextInt();
+        double downPayment = input.nextDouble();
 
         System.out.println("Interest rate: ");
         //takes input from user & stores it in variable interest
@@ -33,40 +35,26 @@ class MortgageCalculator {
         //takes input from user & stores it in variable time
         int time = input.nextInt();
 
-        System.out.println("You entered the following information: " + '\n' + "House price: $" + housePrice + '\n' + "Down payment: $"+ downPayment + '\n' + "Interest rate: " +interest+"%"+ '\n' + "Loan period: " +time +" years " + '\n' );
+//        System.out.println("You entered the following information: " + '\n' + "House price: $" + housePrice + '\n' + "Down payment: $"+ downPayment + '\n' + "Interest rate: " +interest+"%"+ '\n' + "Loan period: " +time +" years " + '\n' );
 
         //creates a new loan object
         Loan newLoan = new Loan(housePrice, downPayment,interest, time);
 
+        //adds new loan to record.txt
+        Helper helper = new Helper();
+        helper.addToRecord(newLoan);
 
-        Gson gson = new Gson();
-        //converts java objects to JSON strings
-        String json = gson.toJson(newLoan);
-
-        try {
-            file = new FileWriter("/Users/olenka/Desktop/p0/Record.txt", true);
-            file.write('\n');
-            file.write(json); // writes json to file
-            log.info("String has been successfully copied to file...");
-        } catch (IOException e){
-            e.printStackTrace();
-        } finally {
-            try {
-                file.flush();
-                file.close();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        }
-
+        Locale locale = new Locale("en", "US");
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
 
         //prints loan calculations
-        System.out.println("Total monthly payment (includes principal & interest): $ " + newLoan.calculateMonthlyPayments());
+        System.out.println("----------------------------------------------------------");
+        System.out.println("Total monthly payment (includes principal & interest): " + currencyFormatter.format(Math.round(newLoan.calculateMonthlyPayments()*100.0)/100.0));
                 System.out.println(
-                "\nMonthly interest Payment: $"+newLoan.calculateMonthlyInterestPayments() +
-                "\nMonthly principal payment: $" + newLoan.calculateMonthlyPrincipalPayments() +
-                "\nTotal Loan payment: $" + newLoan.calculateTotalLoanPayment() + "\nTotal interest: $ " + newLoan.calculateTotalInterestPayment());
-
+                "\nMonthly interest Payment: "+ currencyFormatter.format(Math.round(newLoan.calculateMonthlyInterestPayments() *100.0)/100.0) +
+                "\nMonthly principal payment: " +currencyFormatter.format( Math.round(newLoan.calculateMonthlyPrincipalPayments() *100.0)/100.0)+
+                "\nTotal Loan payment: " + currencyFormatter.format(Math.round(newLoan.calculateTotalLoanPayment() *100.0)/100.0)+ "\nTotal interest: " + currencyFormatter.format(Math.round(newLoan.calculateTotalInterestPayment()*100.0)/100.0));
+        System.out.println("----------------------------------------------------------");
         System.out.println("Do you want to see the amortization table ? (Y/N) ");
         char status = input.next().charAt(0);
         if(status == 'Y' ) {

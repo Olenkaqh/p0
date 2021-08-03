@@ -4,3 +4,10 @@
 {"housePrice":400000,"loanAmount":100000,"interest":5.0,"time":5}
 {"housePrice":350000,"loanAmount":345000,"interest":3.8,"time":30}
 {"housePrice":100000,"loanAmount":95500,"interest":8.0,"time":15}
+{"housePrice":500000,"loanAmount":450000,"interest":4.0,"time":30}
+{"housePrice":750000,"loanAmount":675000,"interest":3.5,"time":30}
+{"housePrice":450000,"loanAmount":447000,"interest":5.0,"time":15}
+{"housePrice":100000,"loanAmount":99500,"interest":3.0,"time":30}
+{"housePrice":200000,"loanAmount":190000,"interest":3.0,"time":30}
+{"housePrice":500000,"loanAmount":450000,"interest":3.5,"time":30}
+{"housePrice":500000.0,"loanAmount":490000.0,"interest":4.9,"time":30}

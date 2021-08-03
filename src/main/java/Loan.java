@@ -1,14 +1,17 @@
 import java.lang.Math;
+import java.text.NumberFormat;
+import java.util.Locale;
 
 public class Loan {
+
     // data members
-    int housePrice;
-    int loanAmount;
+    double housePrice;
+    double loanAmount;
     double interest;
     int time;
 
     // constructor
-    public Loan(int housePrice, int downPayment, double interest, int time) {
+    public Loan(double housePrice, double downPayment, double interest, int time) {
         this.housePrice = housePrice;
         this.loanAmount = housePrice - downPayment;
         this.interest = interest;
@@ -67,7 +70,8 @@ public class Loan {
 
     // prints the amortized table for monthly payments
     public void generateAmortizedPaymentsTable(char period) {
-
+        Locale locale = new Locale("en", "US");
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
         if ( period =='m') {
             //prints the table header
             System.out.println("---------------------------------------------------------");
@@ -82,7 +86,7 @@ public class Loan {
 
             //prints the loan information for each month;
             for (int i = 1; i <= months; i++) {
-                System.out.format("%5s %10s %10s %10s %15s", i,Math.round(monthlyPayment* 100.0) /100.0, Math.round(monthlyPrincipal* 100.0) /100.0, Math.round(monthlyInterest* 100.0) /100.0, Math.round(totalBalance* 100.0) /100.0);
+                System.out.format("%5s %10s %10s %10s %15s", i,currencyFormatter.format(Math.round(monthlyPayment* 100.0) /100.0), currencyFormatter.format(Math.round(monthlyPrincipal* 100.0) /100.0), currencyFormatter.format(Math.round(monthlyInterest* 100.0) /100.0), currencyFormatter.format(Math.round(totalBalance* 100.0) /100.0));
                 monthlyInterest = totalBalance * (this.interest / 1200);
                 monthlyPrincipal =monthlyPayment - monthlyInterest;
                 totalBalance  =  totalBalance - monthlyPrincipal;
@@ -116,7 +120,7 @@ public class Loan {
                     annualBalance -= monthlyPrincipal;
                 }
 
-                System.out.format("%5s %20s %20s %20s %20s", i,Math.round(monthlyPayment*12* 100.0) /100.0, Math.round(annualPrincipal* 100.0) /100.0, Math.round(annualInterest* 100.0) /100.0, Math.round(annualBalance* 100.0) /100.0);
+                System.out.format("%5s %20s %20s %20s %20s", i,currencyFormatter.format(Math.round(monthlyPayment*12* 100.0) /100.0),currencyFormatter.format( Math.round(annualPrincipal* 100.0) /100.0), currencyFormatter.format(Math.round(annualInterest* 100.0) /100.0), currencyFormatter.format(Math.round(annualBalance* 100.0) /100.0));
 
                 //resets variables for each year
                     annualInterest = 0;
