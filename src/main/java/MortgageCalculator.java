@@ -40,11 +40,20 @@ class MortgageCalculator {
 
         System.out.println("Do you want to see the amortization table ? (Y/N) ");
         char status = input.next().charAt(0);
-
         if(status == 'Y' ){
-            //returns the amortized Schedule table
-        newLoan.generateAmortizedPaymentsTable() ;
+
+                System.out.println("Do you want the monthly or annual table? (m :month or a: annual)");
+                char status1 = input.next().charAt(0);
+                    while(status1 != 'm' && status1 != 'a'){
+                        System.out.println("Please enter the right command.");
+                        status1 = input.next().charAt(0);
+                    }
+
+//                }
+            //returns the amortized Schedule table for the respective period
+            newLoan.generateAmortizedPaymentsTable(status1);
         }
+
         System.out.println("Do you want to see how long it will take to pay off your loan if you paid an extra amount every month ? (Y/N) ");
         char status2= input.next().charAt(0);
         if ( status2 == 'Y'){

@@ -64,26 +64,67 @@ public class Loan {
     }
 
     // prints the amortized table for monthly payments
-    public void generateAmortizedPaymentsTable() {
-        //prints the table header
-        System.out.println("---------------------------------------------------------");
-        System.out.format("%5s %10s %10s %10s %15s", "Month","Monthly Payment", "Principal", "Interest", "Total balance");
-        System.out.println("\n-------------------------------------------------------");
+    public void generateAmortizedPaymentsTable(char period) {
 
-        double monthlyPayment = this.calculateMonthlyPayments();
-        double monthlyPrincipal = this.calculateMonthlyPrincipalPayments();
-        double monthlyInterest = this.calculateMonthlyInterestPayments();
-        double totalBalance = this.loanAmount -monthlyPrincipal;
-        int months  = this.time* 12;
 
-        //prints the loan information for each month;
-        for (int i = 1; i <= months; i++) {
-            System.out.format("%5s %10s %10s %10s %15s", i,Math.round(monthlyPayment* 100.0) /100.0, Math.round(monthlyPrincipal* 100.0) /100.0, Math.round(monthlyInterest* 100.0) /100.0, Math.round(totalBalance* 100.0) /100.0);
-            monthlyInterest = totalBalance * (this.interest / 1200);
-            monthlyPrincipal =monthlyPayment - monthlyInterest;
-            totalBalance  =  totalBalance - monthlyPrincipal;
 
-            System.out.println('\n');
+        if ( period =='m') {
+            //prints the table header
+            System.out.println("---------------------------------------------------------");
+            System.out.format("%5s %10s %10s %10s %15s", "Month","Monthly Payment", "Principal", "Interest", "Total balance");
+            System.out.println("\n-------------------------------------------------------");
+
+            double monthlyPayment = this.calculateMonthlyPayments();
+            double monthlyPrincipal = this.calculateMonthlyPrincipalPayments();
+            double monthlyInterest = this.calculateMonthlyInterestPayments();
+            double totalBalance = this.loanAmount -monthlyPrincipal;
+            int months  = this.time* 12;
+
+            //prints the loan information for each month;
+            for (int i = 1; i <= months; i++) {
+                System.out.format("%5s %10s %10s %10s %15s", i,Math.round(monthlyPayment* 100.0) /100.0, Math.round(monthlyPrincipal* 100.0) /100.0, Math.round(monthlyInterest* 100.0) /100.0, Math.round(totalBalance* 100.0) /100.0);
+                monthlyInterest = totalBalance * (this.interest / 1200);
+                monthlyPrincipal =monthlyPayment - monthlyInterest;
+                totalBalance  =  totalBalance - monthlyPrincipal;
+
+                System.out.println('\n');
+            }
+        }
+        else {
+            double monthlyPayment = this.calculateMonthlyPayments();
+            double monthlyPrincipal = this.calculateMonthlyPrincipalPayments();
+//            double monthlyInterest = this.calculateMonthlyInterestPayments();
+            double monthlyInterest;
+            double totalBalance = this.loanAmount;
+            //prints the table header
+            System.out.println("---------------------------------------------------------");
+            System.out.format("%5s %20s %20s %20s %20s", "Year","Annual payment", "Annual principal", "Annual interest", "Total balance");
+            System.out.println("\n-------------------------------------------------------");
+
+            double annualPrincipal = 0;
+            double annualInterest = 0 ;
+            double annualBalance =this.loanAmount;
+            int years  = this.time;
+
+            //prints the loan information for each month;
+            for (int i = 1; i <= years; i++) {
+                for(int j = 1; j <= 12; j++){
+                    monthlyInterest = totalBalance * (this.interest / 1200);
+                    monthlyPrincipal =monthlyPayment - monthlyInterest;
+                    totalBalance  =  totalBalance - monthlyPrincipal;
+                    annualInterest += monthlyInterest;
+                    annualPrincipal += monthlyPrincipal;
+                    annualBalance -= monthlyPrincipal;
+                }
+
+                System.out.format("%5s %10s %10s %10s %15s", i,Math.round(monthlyPayment*12* 100.0) /100.0, Math.round(annualPrincipal* 100.0) /100.0, Math.round(annualInterest* 100.0) /100.0, Math.round(annualBalance* 100.0) /100.0);
+
+                //resets variables for each year
+                    annualInterest = 0;
+                   annualPrincipal = 0;
+
+                System.out.println('\n');
+            }
         }
 
     }
