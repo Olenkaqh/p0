@@ -1,9 +1,18 @@
 # Mortgage Calculator
 ## Overview
-This program calculates the montly payments for a house loan. 
-## Possible features 
-* calculate total interest payment 
-* calculate principal repayment
-* calculate total loan repayment 
-* Calculate other types of loans
-* Show other loan options using a real state API 
+ Command line application where users can calculate their mortgage payments.
+## Technologies Used
+* Java
+* JUnit
+* Maven
+## Features 
+* Calculates monthly payments 
+* Calculates total interest payment 
+* Calculates total principal repayment
+* Calculates total loan repayment 
+* Calculates amortization table (monthly and annual)
+* Calculates mortgage payoff time when additional monthly payments are made
+* Adjustable interest rate 
+* Adjustable loan period
+
+ 
