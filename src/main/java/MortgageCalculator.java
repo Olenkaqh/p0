@@ -1,9 +1,5 @@
-
-import java.io.IOException;
-import com.google.gson.Gson;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.text.NumberFormat;
 import java.util.Locale;
 import java.util.Scanner;
@@ -74,7 +70,7 @@ class MortgageCalculator {
             System.out.println("----- EXTRA PAYMENT ----  ");
             System.out.println("Extra payment per month: ");
             double extraAmount = input.nextDouble();
-            System.out.println("You could pay off your mortgage in " + Math.floor(newLoan.calculateNewNumberOfPayments(extraAmount)/12)  +" years or " +  Math.floor(newLoan.calculateNewNumberOfPayments(extraAmount)) + " payments");
+            System.out.println("You could pay off your mortgage in " + Math.round(newLoan.calculateNewNumberOfPayments(extraAmount)/12)  +" years or " +  Math.round(newLoan.calculateNewNumberOfPayments(extraAmount)) + " monthly payments");
             newLoan.calculateNewNumberOfPayments(extraAmount) ;
         }
 

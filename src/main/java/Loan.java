@@ -74,9 +74,9 @@ public class Loan {
         NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance(locale);
         if ( period =='m') {
             //prints the table header
-            System.out.println("---------------------------------------------------------");
-            System.out.format("%5s %10s %10s %10s %15s", "Month","Monthly Payment", "Principal", "Interest", "Total balance");
-            System.out.println("\n-------------------------------------------------------");
+            System.out.println("----------------------------------------------------------------------------------------------------");
+            System.out.format("%5s %20s %20s %20s %20s", "Month","Monthly Payment", "Principal", "Interest", "Total principal balance");
+            System.out.println("\n---------------------------------------------------------------------------------------------------");
 
             double monthlyPayment = this.calculateMonthlyPayments();
             double monthlyPrincipal = this.calculateMonthlyPrincipalPayments();
@@ -86,7 +86,7 @@ public class Loan {
 
             //prints the loan information for each month;
             for (int i = 1; i <= months; i++) {
-                System.out.format("%5s %10s %10s %10s %15s", i,currencyFormatter.format(Math.round(monthlyPayment* 100.0) /100.0), currencyFormatter.format(Math.round(monthlyPrincipal* 100.0) /100.0), currencyFormatter.format(Math.round(monthlyInterest* 100.0) /100.0), currencyFormatter.format(Math.round(totalBalance* 100.0) /100.0));
+                System.out.format("%5s %20s %20s %20s %20s", i,currencyFormatter.format(Math.round(monthlyPayment* 100.0) /100.0), currencyFormatter.format(Math.round(monthlyPrincipal* 100.0) /100.0), currencyFormatter.format(Math.round(monthlyInterest* 100.0) /100.0), currencyFormatter.format(Math.round(totalBalance* 100.0) /100.0));
                 monthlyInterest = totalBalance * (this.interest / 1200);
                 monthlyPrincipal =monthlyPayment - monthlyInterest;
                 totalBalance  =  totalBalance - monthlyPrincipal;
@@ -100,9 +100,9 @@ public class Loan {
             double monthlyInterest;
             double totalBalance = this.loanAmount;
             //prints the table header
-            System.out.println("---------------------------------------------------------");
-            System.out.format("%5s %20s %20s %20s %20s", "Year","Annual payment", "Annual principal", "Annual interest", "Total balance");
-            System.out.println("\n-------------------------------------------------------");
+            System.out.println("-----------------------------------------------------------------------------------------------------------------");
+            System.out.format("%5s %20s %20s %20s %20s", "Year","Annual payment", "Annual principal", "Annual interest", "Total principal balance");
+            System.out.println("\n---------------------------------------------------------------------------------------------------------------");
 
             double annualPrincipal = 0;
             double annualInterest = 0 ;

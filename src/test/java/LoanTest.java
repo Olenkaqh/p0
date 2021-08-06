@@ -13,7 +13,7 @@ public class LoanTest {
 
     @Test
     public void testLoanConstructor() {
-        Assert.assertEquals(100000, newLoan1.loanAmount);
+        Assert.assertEquals(100000, newLoan1.loanAmount, DELTA);
         Assert.assertEquals(1, newLoan1.interest, DELTA);
         Assert.assertEquals(30, newLoan1.time);
     }
